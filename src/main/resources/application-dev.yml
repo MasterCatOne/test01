@@ -1,6 +1,6 @@
 server:
   port: 8080 #服务端口
-
+#显示debug级别信息
 logging:
   level:
     org.example.Controller: debug

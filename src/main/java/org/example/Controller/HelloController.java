@@ -1,5 +1,6 @@
 package org.example.Controller;
 
+import lombok.extern.slf4j.Slf4j;
 import org.example.POJO.DTO.UserDTO;
 import org.example.POJO.VO.UserVO;
 import org.springframework.beans.BeanUtils;
@@ -8,6 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
+
+@Slf4j
 @RestController
 public class HelloController {
     @GetMapping("/")
@@ -25,10 +28,13 @@ public class HelloController {
         user.setName("张三");
         user.setAge(18);
         response.add(user);
-
         UserVO user1 = new UserVO();
         user1.setName("李四");
         user1.setAge(19);
+        log.info("info级别的日志");
+        log.warn("warn级别的日志");
+        log.error("error级别的日志");
+        log.debug("debug级别的日志");
         response.add(user1);
         return response;
     }
@@ -45,6 +51,7 @@ public class HelloController {
         UserVO userVO = new UserVO();
         userVO.setName(name);
         userVO.setAge(18);
+
         return userVO;
 
     }/**
