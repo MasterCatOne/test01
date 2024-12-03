@@ -1,2 +1,6 @@
 server:
   port: 8080 #服务端口
+
+logging:
+  level:
+    org.example.Controller: debug
