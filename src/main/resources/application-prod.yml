@@ -1,2 +1,10 @@
 server:
   port: 8093 #服务端口
+
+spring:
+  datasource: # mysql数据库连接
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://61.157.97.82:3306/xnkd?serverTimezone=GMT%2B8&characterEncoding=utf-8
+    username: root
+    password: 123456

@@ -3,4 +3,12 @@ server:
 #显示debug级别信息
 logging:
   level:
-    org.example.Controller: debug
+    org.example.controller: debug
+
+spring:
+  datasource: # mysql数据库连接
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/xnkd?serverTimezone=GMT%2B8&characterEncoding=utf-8
+    username: root
+    password: 123456

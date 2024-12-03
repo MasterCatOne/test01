@@ -1,9 +1,9 @@
-package org.example.POJO.DTO;
+package com.example.model.VO;
 
 import lombok.Data;
 
 @Data
-public class UserDTO {
+public class UserVO {
     private Long id;
     private String name;
     private Integer age;

@@ -1,8 +1,8 @@
-package org.example.handler;
+package com.example.handler;
 import lombok.extern.slf4j.Slf4j;
-import org.example.POJO.VO.ResponseVO;
-import org.example.utils.BusinessException;
-import org.example.utils.ResponseEnum;
+import com.example.model.VO.ResponseVO;
+import com.example.utils.BusinessException;
+import com.example.utils.ResponseEnum;
 import org.springframework.beans.ConversionNotSupportedException;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.http.converter.HttpMessageNotWritableException;

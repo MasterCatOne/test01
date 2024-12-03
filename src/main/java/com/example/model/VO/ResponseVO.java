@@ -1,7 +1,7 @@
-package org.example.POJO.VO;
+package com.example.model.VO;
 
+import com.example.utils.ResponseEnum;
 import lombok.Data;
-import org.example.utils.ResponseEnum;
 
 import java.util.HashMap;
 import java.util.Map;
