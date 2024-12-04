@@ -1,9 +1,9 @@
-package com.example.model.VO;
+package com.example.model.dto;
 
 import lombok.Data;
 
 @Data
-public class UserVO {
+public class UserDTO {
     private Long id;
     private String name;
     private Integer age;

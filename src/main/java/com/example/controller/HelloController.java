@@ -1,26 +1,28 @@
 package com.example.controller;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.example.model.DTO.UserLoginDTO;
-import com.example.model.DTO.UserRegisterDTO;
+import com.example.handler.LoginInterceptor;
+import com.example.model.bo.LoginUserBO;
+import com.example.model.dto.UserLoginDTO;
+import com.example.model.dto.UserRegisterDTO;
 import com.example.model.po.User;
 import com.example.service.IUserService;
 import lombok.extern.slf4j.Slf4j;
-import com.example.model.DTO.UserDTO;
-import com.example.model.VO.ResponseVO;
-import com.example.model.VO.UserVO;
+import com.example.model.dto.UserDTO;
+import com.example.model.vo.ResponseVO;
+import com.example.model.vo.UserVO;
 import lombok.val;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 
 @Slf4j
 @RestController
+@RequestMapping("/api/user")
 public class HelloController {
     @Autowired
     private IUserService userService;
@@ -58,7 +60,15 @@ public class HelloController {
     @GetMapping("/getList2/{id}")
     public ResponseVO getUsers2(@PathVariable Long id) {
         User byId = userService.getById(id);
-        return ResponseVO.ok().data("user",byId);
+        HashMap<String,User> map = new HashMap<>();
+        map.put("查询出的用户",byId);
+        LoginUserBO loginUserBO = LoginInterceptor.threadLocal.get();
+        User user=new User();
+        user.setId(loginUserBO.getId());
+        user.setName(loginUserBO.getName());
+        user.setEmail(loginUserBO.getEmail());
+        map.put("当前登录的用户",user);
+        return ResponseVO.ok().data("item",map);
     }
     /**
      * 根据名字获取用户

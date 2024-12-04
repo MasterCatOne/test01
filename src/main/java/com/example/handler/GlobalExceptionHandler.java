@@ -1,6 +1,6 @@
 package com.example.handler;
 import lombok.extern.slf4j.Slf4j;
-import com.example.model.VO.ResponseVO;
+import com.example.model.vo.ResponseVO;
 import com.example.utils.BusinessException;
 import com.example.utils.ResponseEnum;
 import org.springframework.beans.ConversionNotSupportedException;
@@ -83,4 +83,7 @@ public class GlobalExceptionHandler {
         //SERVLET_ERROR(-102, "servlet请求异常"),
         return ResponseVO.error().message(ResponseEnum.SERVLET_ERROR.getMessage()).code(ResponseEnum.SERVLET_ERROR.getCode());
     }
+    /**
+     * @
+     */
 }

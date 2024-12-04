@@ -1,4 +1,4 @@
-package com.example.model.VO;
+package com.example.model.vo;
 
 import com.example.utils.ResponseEnum;
 import lombok.Data;

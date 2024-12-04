@@ -1,10 +1,9 @@
 package com.example.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.example.model.DTO.UserDTO;
-import com.example.model.DTO.UserLoginDTO;
-import com.example.model.DTO.UserRegisterDTO;
-import com.example.model.VO.ResponseVO;
+import com.example.model.dto.UserLoginDTO;
+import com.example.model.dto.UserRegisterDTO;
+import com.example.model.vo.ResponseVO;
 import com.example.model.po.User;
 import com.example.mapper.UserMapper;
 import com.example.service.IUserService;
