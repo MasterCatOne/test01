@@ -1,6 +1,7 @@
 package com.example.service;
 
 import com.example.model.DTO.UserDTO;
+import com.example.model.DTO.UserLoginDTO;
 import com.example.model.DTO.UserRegisterDTO;
 import com.example.model.VO.ResponseVO;
 import com.example.model.po.User;
@@ -16,9 +17,16 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IUserService extends IService<User> {
     /**
-     * 注册的实现
+     * 注册方法
      * @param user
      * @return
      */
     ResponseVO register(UserRegisterDTO user);
+
+    /**
+     *登录方法
+     * @param userLoginDTO 登录信息
+     * @return json数据对象
+     */
+    ResponseVO login(UserLoginDTO userLoginDTO);
 }

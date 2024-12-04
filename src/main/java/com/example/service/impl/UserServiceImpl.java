@@ -2,6 +2,7 @@ package com.example.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.model.DTO.UserDTO;
+import com.example.model.DTO.UserLoginDTO;
 import com.example.model.DTO.UserRegisterDTO;
 import com.example.model.VO.ResponseVO;
 import com.example.model.po.User;
@@ -9,6 +10,7 @@ import com.example.mapper.UserMapper;
 import com.example.service.IUserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.utils.BusinessException;
+import com.example.utils.JWTUtil;
 import com.example.utils.RandomUtils;
 import com.example.utils.ResponseEnum;
 import org.apache.commons.codec.digest.Md5Crypt;
@@ -47,6 +49,25 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
             return ResponseVO.ok().message("注册成功");//返回成功
         } else {
             return ResponseVO.setResult(ResponseEnum.USER_REPEAT);//用户已经存在
+        }
+    }
+
+    @Override
+    public ResponseVO login(UserLoginDTO userLoginDTO) {
+        List<User> userList = userMapper.selectList(new QueryWrapper<User>().eq("email", userLoginDTO.getEmail()));
+
+        if (userList != null && userList.size() ==1) {
+            User user = userList.get(0);//验证通过
+            String crypt = Md5Crypt.md5Crypt(userLoginDTO.getPwd().getBytes(), user.getSecret());//对请求过来的密码进行加密
+            if (crypt.equals(user.getPwd())) {
+                String token = JWTUtil.geneJsonWebToken(user);//生成token
+                return ResponseVO.ok().data("token",token);
+            }else {
+                return ResponseVO.setResult(ResponseEnum.USER_PWD_ERROR);//密码错误
+            }
+        }else {
+
+            return ResponseVO.setResult(ResponseEnum.ACCOUNT_UNREGISTER);//未注册
         }
     }
     private boolean checkUnique(String email) {

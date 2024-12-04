@@ -1,6 +1,7 @@
 package com.example.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.example.model.DTO.UserLoginDTO;
 import com.example.model.DTO.UserRegisterDTO;
 import com.example.model.po.User;
 import com.example.service.IUserService;
@@ -113,7 +114,15 @@ public class HelloController {
     public ResponseVO save(@RequestBody UserRegisterDTO user){
        return userService.register(user);
     }
-
+    /**
+     * 用户登录
+     * @return
+     */
+    @PostMapping("/login")
+    public ResponseVO login(@RequestBody UserLoginDTO userLoginDTO) {
+        ResponseVO responseVO = userService.login(userLoginDTO);
+        return responseVO;
+    }
     /**
      * 普通保存用户新版
      * @param user 用户信息
@@ -179,6 +188,7 @@ public class HelloController {
         return b ? ResponseVO.ok():ResponseVO.error();
 
     }
+
 
 }
 
