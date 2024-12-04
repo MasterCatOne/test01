@@ -1,5 +1,6 @@
 package com.example.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.model.po.User;
 import com.example.service.IUserService;
 import lombok.extern.slf4j.Slf4j;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 
 @Slf4j
@@ -44,6 +46,16 @@ public class HelloController {
         log.debug("debug级别的日志");
         response.add(user1);
         return ResponseVO.ok().data("item",response);
+    }
+
+    /**
+     * 使用id查询用户新版
+     * @return 响应
+     */
+    @GetMapping("/getList2/{id}")
+    public ResponseVO getUsers2(@PathVariable Long id) {
+        User byId = userService.getById(id);
+        return ResponseVO.ok().data("user",byId);
     }
     /**
      * 根据名字获取用户
@@ -93,7 +105,7 @@ public class HelloController {
         return ResponseVO.ok().data("item",userVO);
     }
     /**
-     * 注册用户
+     * 注册用户原版
      * @param user 用户信息
      */
     @PostMapping("/register")//用于接收保存数据请求
@@ -105,7 +117,7 @@ public class HelloController {
     }
 
     /**
-     * 普通保存用户
+     * 普通保存用户新版
      * @param user 用户信息
      * @return 响应
      */
@@ -118,7 +130,7 @@ public class HelloController {
         return save ? ResponseVO.ok():ResponseVO.error();
     }
     /**
-     * 更新用户信息
+     * 更新用户信息原版
      * @param user
      * @return
      */
@@ -129,6 +141,27 @@ public class HelloController {
         //userService.updateById(user)
         return ResponseVO.ok().data("item",userVO);
     }
+
+    /**
+     * 更新用户的新版
+     * @param user 用户的信息
+     * @return 响应
+     */
+    @PutMapping("/updateById2")//用于接收更新请求
+    public ResponseVO updateById2(@RequestBody UserDTO user) {
+        val user1 = new User();
+        BeanUtils.copyProperties(user, user1);
+        boolean b = userService.updateById(user1);
+        //userService.updateById(user)
+        return b ? ResponseVO.ok():ResponseVO.error();
+    }
+
+    /**
+     * 删除一个用户原版
+     * @param id
+     * @return
+     */
+
     @DeleteMapping("/remove/{id}")
     public ResponseVO removeById(@PathVariable Long id) {
         UserVO userVO = new UserVO();
@@ -136,5 +169,17 @@ public class HelloController {
         //UserService.removeById(id)
         return ResponseVO.ok().data("item",userVO);
     }
+
+    /**
+     * 逻辑删除一个用户新版
+     * @param id 要删除的用户id
+     * @return 响应
+     */
+    @DeleteMapping("/del/{id}")
+    public ResponseVO del(@PathVariable Long id){
+        boolean b = userService.removeById(id);
+        return b ? ResponseVO.ok():ResponseVO.error();
+    }
+
 }
 
