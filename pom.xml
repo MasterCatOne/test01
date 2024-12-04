@@ -68,6 +68,17 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
     </dependency>
+    <!--用于加密 -->
+    <dependency>
+      <groupId>commons-codec</groupId>
+      <artifactId>commons-codec</artifactId>
+    </dependency>
+    <!-- JWT相关依赖-->
+<!--    <dependency>-->
+<!--      <groupId>io.jsonwebtoken</groupId>-->
+<!--      <artifactId>jjwt</artifactId>-->
+<!--      <version>0.9.1</version>-->
+<!--    </dependency>-->
   </dependencies>
   <build>
     <plugins>

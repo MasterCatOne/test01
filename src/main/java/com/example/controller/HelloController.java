@@ -1,6 +1,7 @@
 package com.example.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.example.model.DTO.UserRegisterDTO;
 import com.example.model.po.User;
 import com.example.service.IUserService;
 import lombok.extern.slf4j.Slf4j;
@@ -109,11 +110,8 @@ public class HelloController {
      * @param user 用户信息
      */
     @PostMapping("/register")//用于接收保存数据请求
-    public ResponseVO save(@RequestBody UserDTO user){
-        UserVO userVO = new UserVO();
-        BeanUtils.copyProperties(user, userVO);
-        //对数据进行保存
-        return ResponseVO.ok().data("item",userVO);
+    public ResponseVO save(@RequestBody UserRegisterDTO user){
+       return userService.register(user);
     }
 
     /**
@@ -179,6 +177,7 @@ public class HelloController {
     public ResponseVO del(@PathVariable Long id){
         boolean b = userService.removeById(id);
         return b ? ResponseVO.ok():ResponseVO.error();
+
     }
 
 }
