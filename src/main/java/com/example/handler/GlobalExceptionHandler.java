@@ -40,6 +40,15 @@ public class GlobalExceptionHandler {
     public ResponseVO handleBindException(BindException e){
         return ResponseVO.error().message(e.getMessage());
     }
+    /**
+     * 拦截ArithmeticException
+     */
+    @ExceptionHandler(ArithmeticException.class)
+    public ResponseVO handleArithmeticException(ArithmeticException e) {
+        log.error(e.getMessage(), e);
+        return ResponseVO.error().message("除零异常");
+    }
+
 
 
     /**

@@ -42,6 +42,7 @@ public class HelloController {
         UserVO user1 = new UserVO();
         user1.setName("李四");
         user1.setAge(19);
+        int i=1/0;
         log.info("info级别的日志");
         log.warn("warn级别的日志");
         log.error("error级别的日志");
