@@ -1,11 +1,14 @@
 package com.example.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.model.dto.UserLoginDTO;
 import com.example.model.dto.UserRegisterDTO;
+import com.example.model.vo.PageVO;
 import com.example.model.vo.ResponseVO;
 import com.example.model.po.User;
 import com.example.mapper.UserMapper;
+import com.example.query.UserPageQuery;
 import com.example.service.IUserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.utils.BusinessException;
@@ -13,6 +16,8 @@ import com.example.utils.JWTUtil;
 import com.example.utils.RandomUtils;
 import com.example.utils.ResponseEnum;
 import org.apache.commons.codec.digest.Md5Crypt;
+import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -69,6 +74,24 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
             return ResponseVO.setResult(ResponseEnum.ACCOUNT_UNREGISTER);//未注册
         }
     }
+
+    /**
+     * 分页查询用户列表
+     * @param pageQuery 查询参数
+     * @return 分页信息
+     */
+    @Override
+    public ResponseVO queryUserPage(UserPageQuery pageQuery) {
+        Page<User> sort = pageQuery.toMpPageDefaultSortByCreateTimeDesc();
+        Page<User> page = lambdaQuery().eq(ObjectUtils.isNotEmpty(pageQuery.getAge()),User::getAge, pageQuery.getAge())
+                .like(StringUtils.isNotBlank(pageQuery.getEmail()),User::getEmail, pageQuery.getEmail())
+                .like(StringUtils.isNotBlank(pageQuery.getName()),User::getName, pageQuery.getName())
+                .page(sort);
+        PageVO<User> userPageVo = new PageVO<>();
+        userPageVo.of(page);
+        return ResponseVO.ok().data("items",userPageVo);
+    }
+
     private boolean checkUnique(String email) {
         QueryWrapper queryWrapper = new QueryWrapper<User>().eq("email", email);//创建查询条件
         List<User> list = userMapper.selectList(queryWrapper); //查找数据库中是否有对应的账号

@@ -5,6 +5,7 @@ import com.example.model.bo.LoginUserBO;
 import com.example.model.dto.UserLoginDTO;
 import com.example.model.dto.UserRegisterDTO;
 import com.example.model.po.User;
+import com.example.query.UserPageQuery;
 import com.example.service.IUserService;
 import lombok.extern.slf4j.Slf4j;
 import com.example.model.dto.UserDTO;
@@ -133,6 +134,14 @@ public class HelloController {
     public ResponseVO login(@RequestBody UserLoginDTO userLoginDTO) {
         ResponseVO responseVO = userService.login(userLoginDTO);
         return responseVO;
+    }
+    /**
+     * 分页查询
+     * @param pageQuery 分页查询对象
+     */
+    @GetMapping("/page")
+    public ResponseVO queryUserPage( UserPageQuery pageQuery){
+        return userService.queryUserPage(pageQuery);
     }
     /**
      * 普通保存用户新版

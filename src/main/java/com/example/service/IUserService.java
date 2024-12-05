@@ -5,6 +5,7 @@ import com.example.model.dto.UserRegisterDTO;
 import com.example.model.vo.ResponseVO;
 import com.example.model.po.User;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.example.query.UserPageQuery;
 
 /**
  * <p>
@@ -28,4 +29,11 @@ public interface IUserService extends IService<User> {
      * @return json数据对象
      */
     ResponseVO login(UserLoginDTO userLoginDTO);
+
+    /**
+     * 分页请求方法
+     * @param pageQuery
+     * @return 响应信息
+     */
+    ResponseVO queryUserPage(UserPageQuery pageQuery);
 }

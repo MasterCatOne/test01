@@ -83,7 +83,5 @@ public class GlobalExceptionHandler {
         //SERVLET_ERROR(-102, "servlet请求异常"),
         return ResponseVO.error().message(ResponseEnum.SERVLET_ERROR.getMessage()).code(ResponseEnum.SERVLET_ERROR.getCode());
     }
-    /**
-     * @
-     */
+
 }
