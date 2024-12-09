@@ -1,5 +1,5 @@
 server:
-  port: 8080 #服务端口
+  port: 8099 #服务端口
 #显示debug级别信息
 logging:
   level:
