@@ -14,13 +14,14 @@ import com.example.model.vo.UserVO;
 import lombok.val;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-
+@CrossOrigin
 @Slf4j
 @RestController
 @RequestMapping("/api/user")

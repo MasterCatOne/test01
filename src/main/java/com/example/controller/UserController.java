@@ -1,5 +1,6 @@
 package com.example.controller;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author novel
  * @since 2024-12-03
  */
+@CrossOrigin
 @RestController
 @RequestMapping("/user")
 public class UserController {
